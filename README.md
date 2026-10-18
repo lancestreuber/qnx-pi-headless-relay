@@ -199,6 +199,9 @@ production-ready, perform one clean-card Wi-Fi-only boot, restart the relay,
 reboot the QNX Pi, and confirm that remote SSH returns each time. The CTI
 overlay also still needs a clean image build.
 
+See [TEST-RESULTS.md](TEST-RESULTS.md) for the recovered live QNX Pi evidence,
+the automated relay coverage, and the remaining physical release gates.
+
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE).

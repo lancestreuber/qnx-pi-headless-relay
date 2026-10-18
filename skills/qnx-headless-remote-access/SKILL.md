@@ -5,8 +5,9 @@ description: "Configure and diagnose outbound-only remote SSH access for headles
 
 # QNX headless remote access
 
-Use the companion QNX Pi Headless Relay project to provision a target. Treat
-QSTI boot-payload installation and CTI image integration as separate modes.
+Use the QNX Pi Headless Relay project containing this skill to provision a
+target. Treat QSTI boot-payload installation and CTI image integration as
+separate modes.
 
 ## Workflow
 
@@ -25,8 +26,8 @@ QSTI boot-payload installation and CTI image integration as separate modes.
 4. Deploy the loopback-only relay and pin its generated host key.
 5. Install the generated boot payload or CTI overlay. Keep Wi-Fi settings and
    all private keys out of source control.
-6. Boot the QNX Pi, then inspect `qnx-onboot.log` and `qnx-tunnel.log` before
-   changing the design when a connection fails.
+6. Boot the QNX Pi, then inspect `qnx-onboot.log`, `qnx-supervisor.log`, and
+   `qnx-tunnel.log` before changing the design when a connection fails.
 7. Verify a shell, a silent session longer than five minutes, a QNX Pi reboot,
    and a relay restart. Record exact commands and scope for any new fact.
 
