@@ -194,13 +194,15 @@ With Docker available, test the complete generated-key reverse-forward path:
 sh scripts/integration-relay.sh
 ```
 
-The relay container and local end-to-end path pass. Before calling a release
-production-ready, perform one clean-card Wi-Fi-only boot, restart the relay,
-reboot the QNX Pi, and confirm that remote SSH returns each time. The CTI
-overlay also still needs a clean image build.
+The relay container and local end-to-end path pass. The physical predecessor of
+this package also passed repeated Wi-Fi-only SD-card boots, a QNX Pi reboot,
+multiple SSH sessions, and forced tunnel-process recovery. Before calling a
+tagged release production-ready, repeat the hardware test with that release's
+exact generated payload, restart the relay service itself, and complete a clean
+build of the optional CTI overlay.
 
 See [TEST-RESULTS.md](TEST-RESULTS.md) for the recovered live QNX Pi evidence,
-the automated relay coverage, and the remaining physical release gates.
+the automated relay coverage, and the remaining release checks.
 
 ## License
 
