@@ -1,0 +1,23 @@
+# EXAMPLE authorized_keys for the relay sshd — DO NOT USE AS-IS.
+#
+# The relay container reads /home/tunnel/.ssh/authorized_keys (see sshd_config)
+# and start.sh writes this file from TUNNEL_AUTHORIZED_KEYS_B64 (preferred) or
+# TUNNEL_AUTHORIZED_KEYS. Replace each placeholder public key below with the
+# real public half of the corresponding private key, one line per key, then put
+# the whole block into TUNNEL_AUTHORIZED_KEYS on Railway and redeploy.
+#
+# The relay's sshd listens on 127.0.0.1:22 only (loopback), password auth is
+# disabled, the only user is "tunnel", and there is no shell or PTY for these
+# keys. Each key is locked down to exactly one thing on port 2222.
+
+# 1. QNX-to-relay tunnel key (private half lives on the QNX Pi, in
+#    /data/home/root/.ssh/qnx_tunnel_key after first boot). permitlisten lets
+#    the Pi open the loopback reverse listener on 127.0.0.1:2222 and nothing
+#    else.
+restrict,port-forwarding,permitlisten="127.0.0.1:2222" ssh-ed25519 AAAA_REPLACE_WITH_QNX_TUNNEL_PUBLIC_KEY qnxpi-tunnel
+
+# 2. Laptop-to-relay access key (private half lives on your laptop).
+#    permitopen lets the laptop connect to the Pi's 127.0.0.1:2222 listener
+#    and nothing else. This key is only for reaching the relay; it is NOT
+#    authorized to log in to the QNX Pi itself.
+restrict,port-forwarding,permitopen="127.0.0.1:2222" ssh-ed25519 AAAA_REPLACE_WITH_LAPTOP_RELAY_PUBLIC_KEY laptop-relay@your-machine

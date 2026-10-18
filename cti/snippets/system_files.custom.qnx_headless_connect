@@ -1,0 +1,5 @@
+[type=dir uid=0 gid=0 dperms=0755] usr/lib/qnx-headless-connect
+[type=file uid=0 gid=0 perms=0555] usr/lib/qnx-headless-connect/qnx-connect-supervisor.sh=usr/lib/qnx-headless-connect/qnx-connect-supervisor.sh
+[type=file uid=0 gid=0 perms=0555] usr/lib/qnx-headless-connect/qnx-tunnel-launcher.sh=usr/lib/qnx-headless-connect/qnx-tunnel-launcher.sh
+[type=file uid=0 gid=0 perms=0555] usr/lib/qnx-headless-connect/qnx-tunnel.sh=usr/lib/qnx-headless-connect/qnx-tunnel.sh
+[type=file uid=0 gid=0 perms=0555] usr/lib/qnx-headless-connect/wsproxy.py=usr/lib/qnx-headless-connect/wsproxy.py

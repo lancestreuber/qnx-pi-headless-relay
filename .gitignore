@@ -1,0 +1,23 @@
+# Generated deployment bundles contain private keys and service variables.
+.qnx-connect/
+deploy/vps/.env
+deploy/vps/relay.env
+__pycache__/
+*.pyc
+
+# Never commit loose credentials or live network configuration.
+*.env
+.env
+.env.*
+!.env.example
+qnx_tunnel_key
+qnx_laptop
+qnx_relay
+ssh_host_ed25519_key
+wpa_supplicant.conf
+
+# Generated files.
+__pycache__/
+*.pyc
+*.log
+.DS_Store

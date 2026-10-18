@@ -1,0 +1,30 @@
+services:
+  relay:
+    build:
+      context: ../../relay
+    env_file:
+      - relay.env
+    environment:
+      PORT: "8080"
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.10-alpine
+    depends_on:
+      - relay
+    environment:
+      RELAY_DOMAIN: ${RELAY_DOMAIN:?set RELAY_DOMAIN in .env}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,17 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify package
+        run: sh scripts/verify.sh
+      - name: Test WebSocket protocol handling
+        run: python3 scripts/test-wsproxy.py
+      - name: Test relay container round trip and supervision
+        run: sh scripts/integration-relay.sh

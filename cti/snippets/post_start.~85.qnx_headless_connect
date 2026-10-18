@@ -1,0 +1,4 @@
+# Start headless remote access only when the device has been provisioned.
+if [ -r /boot/qnx-connect.conf ]; then
+    on -d /proc/boot/ksh /usr/lib/qnx-headless-connect/qnx-connect-supervisor.sh
+fi

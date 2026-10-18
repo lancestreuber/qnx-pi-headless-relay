@@ -1,0 +1,39 @@
+# qnx-connect client SSH config template. scripts/configure.py renders a ready
+# to use copy with the relay URL, host aliases, port, and key paths filled in.
+#
+# Two aliases, two different keys:
+#   qnx-rdv  -> WebSocket relay, using your laptop-to-relay access key
+#   qnxpi    -> the QNX Pi itself, reached THROUGH the relay, using your
+#               separate laptop-to-QNX login key
+# The relay access key never authenticates to the Pi.
+
+Host qnx-rdv
+    ProxyCommand env SSL_CERT_FILE=/etc/ssl/cert.pem python3 ~/.ssh/qnx-connect-wsproxy.py wss://YOUR_RELAY_HOSTNAME
+    User tunnel
+    IdentityFile ~/.ssh/qnx-connect/qnx_relay
+    IdentitiesOnly yes
+    UserKnownHostsFile ~/.ssh/qnx-connect/relay_known_hosts
+    StrictHostKeyChecking yes
+    BatchMode yes
+    ConnectTimeout 20
+    ServerAliveInterval 15
+    ServerAliveCountMax 20
+    TCPKeepAlive yes
+    ControlMaster no
+
+Host qnxpi
+    HostName 127.0.0.1
+    Port 2222
+    User qnxuser
+    ProxyJump qnx-rdv
+    IdentityFile ~/.ssh/qnx-connect/qnx_laptop
+    IdentitiesOnly yes
+    BatchMode yes
+    ConnectTimeout 20
+    StrictHostKeyChecking accept-new
+    ServerAliveInterval 15
+    ServerAliveCountMax 20
+    TCPKeepAlive yes
+    ControlMaster auto
+    ControlPath ~/.ssh/cm-%C
+    ControlPersist no
