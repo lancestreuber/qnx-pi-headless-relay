@@ -8,6 +8,25 @@ connection to that address, wraps it in a secure WebSocket on port 443, and
 opens a loopback-only reverse port inside a small public relay. A laptop uses a
 second WebSocket connection to reach that port.
 
+## Why this exists
+
+QNX hackathons often provide Raspberry Pi targets that developers need to
+reach over SSH. That is straightforward with an Ethernet cable or a monitor,
+keyboard, and mouse, but becomes difficult when that extra hardware is not
+available. Venue Wi-Fi can also isolate wireless clients, preventing a laptop
+from reaching the QNX Pi directly even when both devices are on the same
+network.
+
+This project avoids that local-network requirement. The QNX Pi and laptop each
+make an outbound connection to the same public relay, so Wi-Fi client isolation
+does not prevent SSH access.
+
+The QNX Pi only needs Wi-Fi it can join without opening a browser. An open
+network, an ordinary password-protected network, or a phone hotspot can work as
+long as it permits outbound HTTPS and WebSocket traffic on port 443. Captive
+portals that require an email address, terms acceptance, or another browser
+login step are not supported during headless boot.
+
 This project is intentionally Wi-Fi-only. It does not fall back to Ethernet.
 If `bcm0` never receives an IPv4 address, the remote tunnel does not start.
 
